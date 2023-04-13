@@ -35,8 +35,7 @@ moneyManager.addMoneyCallback = data => {
             moneyManager.setMessage(response.success, "Баланс пополнен");
         }
     })
-}
-
+};
 moneyManager.conversionMoneyCallback = data => {
     ApiConnector.convertMoney(data, response => {
         if(!response.success) {
@@ -46,8 +45,7 @@ moneyManager.conversionMoneyCallback = data => {
             moneyManager.setMessage(response.success, "Валюта конвертирована");
         }
     })
-}
-
+};
 moneyManager.sendMoneyCallback = data => {
     ApiConnector.transferMoney(data, response => {
         if(!response.success) {
@@ -57,18 +55,16 @@ moneyManager.sendMoneyCallback = data => {
             moneyManager.setMessage(response.success, "Перевод доставлен");
         }
     })
-}
+};
 
 const favoritesWidget = new FavoritesWidget();
-
 ApiConnector.getFavorites(response => {
     if(response.success) {
         favoritesWidget.clearTable();
         favoritesWidget.fillTable(response.data);
         moneyManager.updateUsersList(response.data);
     }
-})
-
+});
 favoritesWidget.addUserCallback = data => {
     ApiConnector.addUserToFavorites(data, response => {
         if(!response.success) {
@@ -80,8 +76,7 @@ favoritesWidget.addUserCallback = data => {
             favoritesWidget.setMessage(response.success, "Пользователь добавлен в избранное");
         }
     })
-}
-
+};
 favoritesWidget.removeUserCallback = data => {
     ApiConnector.removeUserFromFavorites(data, response => {
         if(!response.success) {
@@ -93,4 +88,4 @@ favoritesWidget.removeUserCallback = data => {
             favoritesWidget.setMessage(response.success, "Пользователь успешно удален");
         }
     })
-}
+};
