@@ -29,7 +29,7 @@ const moneyManager = new MoneyManager();
 moneyManager.addMoneyCallback = data => {
     ApiConnector.addMoney(data, response => {
         if(!response.success) {
-            moneyManager.setMessage(response.error, "Ошибка пополнения баланса");
+            moneyManager.setMessage(response.success, response.error);
         } else {
             ProfileWidget.showProfile(response.data);
             moneyManager.setMessage(response.success, "Баланс пополнен");
@@ -39,7 +39,7 @@ moneyManager.addMoneyCallback = data => {
 moneyManager.conversionMoneyCallback = data => {
     ApiConnector.convertMoney(data, response => {
         if(!response.success) {
-            moneyManager.setMessage(response.error, "Ошибка конвертации валюты");
+            moneyManager.setMessage(response.success, response.error);
         } else {
             ProfileWidget.showProfile(response.data);
             moneyManager.setMessage(response.success, "Валюта конвертирована");
@@ -49,7 +49,7 @@ moneyManager.conversionMoneyCallback = data => {
 moneyManager.sendMoneyCallback = data => {
     ApiConnector.transferMoney(data, response => {
         if(!response.success) {
-            moneyManager.setMessage(response.error, "Ошибка перевода средств");
+            moneyManager.setMessage(response.success, response.error);
         } else {
             ProfileWidget.showProfile(response.data);
             moneyManager.setMessage(response.success, "Перевод доставлен");
@@ -68,7 +68,7 @@ ApiConnector.getFavorites(response => {
 favoritesWidget.addUserCallback = data => {
     ApiConnector.addUserToFavorites(data, response => {
         if(!response.success) {
-            favoritesWidget.setMessage(response.error, "Невозможно добавить пользователя в избранное");
+            favoritesWidget.setMessage(response.success, response.error);
         } else {
             favoritesWidget.clearTable();
             favoritesWidget.fillTable(response.data);
@@ -80,7 +80,7 @@ favoritesWidget.addUserCallback = data => {
 favoritesWidget.removeUserCallback = data => {
     ApiConnector.removeUserFromFavorites(data, response => {
         if(!response.success) {
-            favoritesWidget.setMessage(response.error, "Невозможно удалить пользователя");
+            favoritesWidget.setMessage(response.success, response.error);
         } else {
             favoritesWidget.clearTable();
             favoritesWidget.fillTable(response.data);
